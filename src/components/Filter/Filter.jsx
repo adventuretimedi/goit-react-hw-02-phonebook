@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import s from '../Filter/Filter.module.css';
 
 class Filter extends Component {
   handleChange = e => {
@@ -9,8 +10,13 @@ class Filter extends Component {
   render() {
     return (
       <label htmlFor="">
-        <p>Find contacts by name</p>
-        <input onChange={this.handleChange} type="text" name="filter" />
+        <p className={s.titleFind}>Find contacts by name</p>
+        <input
+          onChange={this.handleChange}
+          type="text"
+          name="filter"
+          className={s.inputFind}
+        />
       </label>
     );
   }
