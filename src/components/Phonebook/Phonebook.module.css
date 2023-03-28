@@ -1,0 +1,17 @@
+.phonebook {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 5px;
+  max-width: 350px;
+  padding: 8px;
+  border: 1px solid #212121;
+}
+
+.input {
+  margin-top: 5px;
+}
+
+.button {
+  margin-top: 15px;
+}
