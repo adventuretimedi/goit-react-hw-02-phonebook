@@ -1,10 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import s from './App.module.css';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './Phonebook/ContactForm';
 import ContactsList from './Contacts/ContactsList';
 import Filter from './Filter/Filter';
+import s from './App.module.css';
 
 class App extends Component {
   state = {
