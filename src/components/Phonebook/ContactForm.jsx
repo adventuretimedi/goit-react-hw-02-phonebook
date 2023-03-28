@@ -1,22 +1,22 @@
 import { Component } from 'react';
-import s from './Phonebook.module.css';
+import s from './ContactForm.module.css';
 
-class Phonebook extends Component {
+class ContactForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    console.log(name, number);
+    // console.log(name, number);
     this.props.onAddContact({ name, number });
     form.reset();
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className={s.phonebook}>
+      <form onSubmit={this.handleSubmit} className={s.contactForm}>
         <label htmlFor="">
-          <p>Name</p>
+          <p className={s.inputName}>Name</p>
           <input
             className={s.input}
             type="text"
@@ -28,7 +28,7 @@ class Phonebook extends Component {
         </label>
 
         <label htmlFor="">
-          <p>Number</p>
+          <p className={s.inputName}>Number</p>
           <input
             className={s.input}
             type="tel"
@@ -47,4 +47,4 @@ class Phonebook extends Component {
   }
 }
 
-export default Phonebook;
+export default ContactForm;

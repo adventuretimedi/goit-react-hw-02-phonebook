@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 
-const Contacts = ({ contacts }) => {
+const ContactsList = ({ contacts, removeContact }) => {
   return (
     <div>
       <ul>
         {contacts.map(contact => (
           <li key={contact.id}>
             {contact.name}: {contact.number}
+            <button type="button" onClick={() => removeContact(contact.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -14,8 +17,8 @@ const Contacts = ({ contacts }) => {
   );
 };
 
-Contacts.propTypes = {
+ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 
-export default Contacts;
+export default ContactsList;

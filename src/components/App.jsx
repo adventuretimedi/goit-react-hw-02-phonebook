@@ -1,7 +1,9 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import s from './App.module.css';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import Phonebook from './Phonebook/Phonebook';
-import Contacts from './Contacts/Contacts';
+import ContactForm from './Phonebook/ContactForm';
+import ContactsList from './Contacts/ContactsList';
 import Filter from './Filter/Filter';
 
 class App extends Component {
@@ -16,6 +18,10 @@ class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    if (this.state.contacts.find(contact => contact.name === name)) {
+      Notify.failure(`${name} is already in contacts`);
+      return;
+    }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
@@ -35,17 +41,32 @@ class App extends Component {
         );
   };
 
+  removeContact = contactId => {
+    // console.log(`remove contact: `, contactId);
+    this.setState(prevState => {
+      const deletedContacts = [...prevState.contacts];
+      const index = deletedContacts.findIndex(
+        contact => contact.id === contactId
+      );
+      deletedContacts.splice(index, 1);
+      return { contacts: deletedContacts };
+    });
+  };
+
   render() {
     return (
       <div style={{ padding: '15px' }}>
         <section>
-          <h2>Phonebook</h2>
-          <Phonebook onAddContact={this.addContact} />
+          <h2 className={s.title}>Phonebook</h2>
+          <ContactForm onAddContact={this.addContact} />
         </section>
         <section>
-          <h2>Contacts</h2>
+          <h2 className={s.title}>Contacts</h2>
           <Filter onFilterChanged={this.filterContacts} />
-          <Contacts contacts={this.getFilteredContacts()} />
+          <ContactsList
+            contacts={this.getFilteredContacts()}
+            removeContact={this.removeContact}
+          />
         </section>
       </div>
     );
